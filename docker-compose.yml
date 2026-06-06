@@ -42,6 +42,15 @@ services:
       - "5672:5672"
       - "15672:15672"
 
+  worker:
+    build: ./worker
+    container_name: worker
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+
   nginx:
     image: nginx:latest
     container_name: nginx
